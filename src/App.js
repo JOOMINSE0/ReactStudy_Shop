@@ -3,12 +3,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button, Container, Navbar, Nav} from 'react-bootstrap';
 import { useState } from 'react';
 import data from './data.js';
-import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
 import Detail from './routes/Detail.js';
 
 function App() {
 
   let [shoes] = useState(data);
+  let navigate = useNavigate();
 
   return (
     <div className="App">
@@ -16,8 +17,8 @@ function App() {
         <Container>
           <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Cart</Nav.Link>
+            <Nav.Link onClick={()=>{navigate('/')}}>Home</Nav.Link>
+            <Nav.Link onClick={()=>{navigate('/detail')}}>Cart</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
@@ -48,6 +49,18 @@ function App() {
     </div>
   );
 }
+
+function About(){
+  return(
+    <div>
+      <h4>회사정보</h4>
+    </div>
+  )
+}
+
+
+
+
 
 function Card(props){
   return (
