@@ -2,7 +2,9 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button, Container, Navbar, Nav} from 'react-bootstrap';
 import { useState } from 'react';
-import data from './data.js'
+import data from './data.js';
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+import Detail from './routes/Detail.js';
 
 function App() {
 
@@ -10,7 +12,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar bg="light" data-bs-theme="light">
+        <Navbar bg="light" data-bs-theme="light">
         <Container>
           <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
           <Nav className="me-auto">
@@ -19,14 +21,13 @@ function App() {
           </Nav>
         </Container>
       </Navbar>
-
-      <div className='main-bg'></div>
-
+      {/* <Link to="/">홈</Link>
+      <Link to="/detail">상세페이지</Link> */}
+    <Routes>
+      <Route path="/" element={<div>
+        <div className='main-bg'></div>
       <div className="container">
         <div className="row">
-          
-          {/* <Card shoes={shoes[1]} i={2}></Card>
-          <Card shoes={shoes[2]} i={3}></Card> */}
           {
             shoes.map((a, i)=>{
               return(
@@ -37,6 +38,13 @@ function App() {
 
         </div>
       </div>
+
+      </div>}/>
+      <Route path="/detail" element={<Detail/>}/>
+    </Routes>
+
+
+    
     </div>
   );
 }
