@@ -8,7 +8,7 @@ import Detail from './routes/Detail.js';
 
 function App() {
 
-  let [shoes] = useState(data);
+  let [shoes, setShoes] = useState(data);
   let navigate = useNavigate();
 
   return (
@@ -18,7 +18,7 @@ function App() {
           <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link onClick={()=>{navigate('/')}}>Home</Nav.Link>
-            <Nav.Link onClick={()=>{navigate('/detail')}}>Cart</Nav.Link>
+            <Nav.Link onClick={()=>{navigate('/detail')}}>Detail</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
@@ -36,15 +36,18 @@ function App() {
               )
             })
           }
-
         </div>
       </div>
-
       </div>}/>
-      <Route path="/detail/:id" element={<Detail shoes={shoes}/>}/>
+      
+    <Route path="/detail/:id" element={<Detail shoes={shoes}/>}/>
     </Routes>
 
-
+    <button onClick={()=>{
+      let copy  = [...shoes].sort((a,b) => a.title.localeCompare(b.title));
+      setShoes(copy);
+    }}>가나다순정렬</button>
+ 
     
     </div>
   );
@@ -57,10 +60,6 @@ function About(){
     </div>
   )
 }
-
-
-
-
 
 function Card(props){
   return (
