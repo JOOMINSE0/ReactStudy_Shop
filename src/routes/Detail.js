@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Nav } from "react-bootstrap";
 
 function Detail (props){
     let {id} = useParams();
@@ -7,6 +8,7 @@ function Detail (props){
     let [count, setCount] = useState(0);
     let [alert, setAlert] = useState(true);
     let [num, setNum] = useState('');
+    let [탭, 탭변경] = useState(0);
 
     useEffect(()=>{
         if(isNaN(num) == true){
@@ -57,9 +59,46 @@ function Detail (props){
             <button className="btn btn-danger">주문하기</button> 
             </div>
         </div>
+        
+        {/* defaultActiveKey 기본으로 눌려있을 버튼 */}
+        <Nav variant="tabs"  defaultActiveKey="link0"> 
+            <Nav.Item>
+            <Nav.Link onClick={()=>{탭변경(0)}} eventKey="link0">버튼0</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+            <Nav.Link onClick={()=>{탭변경(1)}} eventKey="link1">버튼1</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+            <Nav.Link onClick={()=>{탭변경(2)}} eventKey="link2">버튼2</Nav.Link>
+            </Nav.Item>
+        </Nav>
+        <TabContent 탭={탭}/>
+
+
+        {/* {
+            탭 == 0 ? <div>내용0</div> : null
+        }
+        {
+            탭 == 1 ? <div>내용1</div> : null
+        }
+        {
+            탭 == 2 ? <div>내용2</div> : null
+        } */}
+
         </div> 
     )
 
+}
+
+function TabContent({탭}){
+    // if ( props.탭 == 0 ){
+    //     return <div>내용0</div>
+    // }if( props.탭 == 1 ){
+    //     return <div>내용1</div>
+    // }if( props.탭 == 2 ){
+    //     return <div>내용2</div>
+    // }
+    return [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][탭]
 }
 
 export default Detail;
