@@ -5,6 +5,7 @@ import { useState } from 'react';
 import data from './data.js';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
 import Detail from './routes/Detail.js';
+import axios from 'axios';
 
 function App() {
 
@@ -34,10 +35,29 @@ function App() {
               return(
                 <Card shoes={shoes[i]} i={i} ></Card>
               )
-            })
-          }
+            })}
         </div>
       </div>
+      <button onClick={()=>{
+        //로딩중 ui띄우기
+        axios.get('https://codingapple1.github.io/shop/data2.json')
+        .then((result)=>{ 
+          console.log(result.data); //핵심 데이터만 보고싶은 경우
+          console.log(shoes);
+          let copy = [...shoes, ...result.data];
+          setShoes(copy);
+          //로딩중 ui숨기기
+        })
+        .catch(()=>{
+          //로딩중 ui숨기기
+          console.log('데이터를 가져오는데 실패했습니다.');
+        })
+
+        axios.post('url', {name: 'kim'}) //서버로 데이터 전송하는 post
+
+        Promise.all([axios.get('url1'), axios.get('url2') ])
+
+      }}>더보기</button>
       </div>}/>
       
     <Route path="/detail/:id" element={<Detail shoes={shoes}/>}/>
