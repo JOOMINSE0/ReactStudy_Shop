@@ -44,7 +44,7 @@ function App() {
         .then((result)=>{ 
           console.log(result.data); //핵심 데이터만 보고싶은 경우
           console.log(shoes);
-          let copy = [...shoes, ...result.data];
+          let copy = [...shoes, ...result.data]; //데이터를 json으로 받아오지만 axios가 array로 자동으로 바꿔줌
           setShoes(copy);
           //로딩중 ui숨기기
         })
@@ -55,7 +55,14 @@ function App() {
 
         axios.post('url', {name: 'kim'}) //서버로 데이터 전송하는 post
 
-        Promise.all([axios.get('url1'), axios.get('url2') ])
+        Promise.all([axios.get('url1'), axios.get('url2') ]) //동시에 ajax요청 여러개 하려면
+        .then(()=>{
+
+        })
+
+        fetch('url') //fetch사용시 json -> array/object 변환과정 필요
+        .then(결과 => 결과.json())
+        .then(data => {})
 
       }}>더보기</button>
       </div>}/>
